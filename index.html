@@ -1,0 +1,116 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+	</script>
+
+	<script type="text/javascript" src="http://192.168.1.141:8080/socket.io/socket.io.js">
+	</script>
+
+	<link rel="stylesheet" type="text/css" href="css/estilo.css">
+	<meta charset="UTF-8">
+	<script>
+		
+		var user; //Almacenar nombre del usuario
+		var socket=io.connect('http://192.168.1.141:8080'); //Nos conectamos a nuestro servidor Nodejs
+
+		$(document).on('ready',function(){ //Cuando el documento este listo
+			
+			var $nombre=$('#nom'); //Obtenemos el nom para el campo donde va el nombre (id="nom")
+			var $mensaje=$('#mensaje'); //Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
+			
+			$nombre.focusout(function(){ //Cuando pierda el foco el campo nombre
+				if ($nombre.val()!==""){ //Validar si se ha escrito algo
+					//Si se escribio
+					user=$nombre.val(); //almacenamos localmente el nombre del usuario
+					socket.emit('nombre',$nombre.val()); //Hacemos un llamado al servidor con la funcion 'nombre' y le pasamos el nombre
+					$nombre.attr('disabled',true); //Y deshabilitamos el input nombre
+				};
+			});
+
+			$mensaje.focus(function(){ //Cuando obtenga el enfoque el campo mensaje
+				if(!$nombre.attr('disabled')){ //Comprobamos si ya tenemos un nombre en el campo
+					$nombre.focus();					
+				};	
+			});
+
+			$('#mensaje').keypress(function(e){//Cuando se da enter la caja de mensaje
+				if(e.which == 13) {
+					e.preventDefault();
+					var el = $('#mensaje'); //Obtenemos el input mensaje
+					if($nombre.attr('disabled')){ //Si el campo nombre esta deshabilitado 
+						socket.emit('mensaje',el.val(), user); //Enviamos el mensaje al servidor por la funcion 'mensaje'
+						el.val('');
+						console.log(user);
+					};
+				}				
+			});
+
+			var $chat=$('#chat'); //Obtenemos el div Chat
+			socket.on('mensaje',function(mensaje,usuario){ //Cuando se de el evento mensaje
+				var chat=document.getElementById('messages'); //obtenemos el elemente 'messages' que es la lista UL
+				var li=document.createElement('li'); //Creamos un elemente li
+				var txt=document.createTextNode(mensaje); //Creamos un nodo de texto con el mensaje que llego
+				var p=document.createElement('p');//Creamos un elemento parrafo
+				var div=document.createElement('div'); //Creamos un div
+				var usr=document.createTextNode(usuario);//Creamos un nodo de texto con el usuario que envio el mensaje
+				
+				div.appendChild(usr); //Al Div le agregamos el usuario
+				p.appendChild(txt); //Al elemento 'p' le agregamos el mensaje
+				li.appendChild(div); //Al li le agregamos como contenido el div que contiene el usuario
+				li.appendChild(p); //Tambien le agregamos el elemento 'p' que contiene el mensaje
+				if (chat.hasChildNodes()) //Si en la caja de chat ya tenemos elementos
+					chat.insertBefore(li,chat.firstChild); //Insertamos de primero el mensaje que llega
+				else //Si es el primer elemento
+					chat.appendChild(li); //solo anexamos el li al chat
+			});
+
+			//Este evento hace lo mismo que la funcion mensaje pero, se da cuando se conecta un usuario nuevo
+			socket.on('msjCon',function(mensaje,usuario){
+				var chat=document.getElementById('messages');
+				var li=document.createElement('li');
+				var txt=document.createTextNode(mensaje); 
+				var p=document.createElement('p');
+				var div=document.createElement('div');
+				var usr=document.createTextNode(usuario);
+				div.appendChild(usr);
+				p.appendChild(txt);
+				li.appendChild(div);
+				li.appendChild(p);
+				if (chat.hasChildNodes())
+					chat.insertBefore(li,chat.firstChild);
+				else
+					chat.appendChild(li);
+				console.log(usuario +' dice: ' + mensaje);
+			});		
+
+			socket.on('actualizarCantidad', function(cantidad){
+				console.log('quedan: ' +  cantidad);
+				$('#cantU').val('');
+				$('#cantU').html(cantidad);
+
+			});
+		});
+		
+	</script>
+	
+	<title></title>
+</head>
+<body>
+	<div id="chat">
+		<div>
+			<p>Usuarios Conectados: <span id="cantU"></span> </p>
+		</div>
+		<input id="nom" type="text" placeholder="Nombre"/>
+
+		<form id="formulario" action="">
+			<input type="text" placeholder="Envia tu comentario" id="mensaje" />		
+		</form>
+		<hr>
+		<ul id="messages">
+
+		</ul>
+		<hr />
+	</div>
+</body>
+</html>

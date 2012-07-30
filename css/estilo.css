@@ -1,0 +1,37 @@
+#messages{ padding: 0px; list-style-type: none;  overflow-x:hiden;}
+#messages li{ padding:0px; margin:18px; }
+#messages li:nth-child(2n+1){
+	background:#333;
+	color:#ff8;
+}
+
+#messages p{
+	border-radius:5px;
+	box-shadow:5px 2px 5px rgba(0,0,0,0.5);
+	margin-top:-5px;
+	padding:5px;
+	text-shadow:2px 2px 2px rgba(0,0,0,0.5);
+	}
+
+#messages div{
+	border-radius:5px;
+	border:1px solid #52d9ef;
+	box-shadow:5px 5px 5px rgba(0,0,0,0.5);
+	height:auto;
+	margin:5px 0px;
+	padding-left:5px; 
+	text-shadow:2px 2px 2px rgba(0,0,0,0.5);	
+}
+
+body{
+	background:#272822;
+	color:white;
+	margin:10px auto;
+	width:100%;
+}
+
+
+#mensaje{
+	margin:2px;
+	width: 100%;
+}
