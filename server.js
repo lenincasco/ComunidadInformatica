@@ -3,7 +3,7 @@ var http = require('http'),
 
 server.listen(8080)
 // Declaración normal de Servidor NodeJs
-//console.log('Servidor Escuchando en puerto 8080')
+console.log('Servidor Escuchando en puerto 8080')
 
 // Declaramos io como instancia de socket.io escuchando al servidor que creamos
 var io = require('socket.io').listen(server)
@@ -18,7 +18,7 @@ var mensajes = []
 
 // Evento que se produce cuando se conecta un cliente al servidor
 io.sockets.on('connection', function(socket) {
-	// console.log('Nueva Socket Conectada ' + socket.id)
+	console.log('Nueva Socket Conectada ' + socket.id)
 	ursConectados++
 	// Emitir a todos la cantidad de usuarios conectados
 	io.sockets.emit('actualizarCantidad', ursConectados)
@@ -50,7 +50,7 @@ io.sockets.on('connection', function(socket) {
 	socket.on('getNombre', function() {
 		nombre = socket.username
 		socket.emit('usuario', socket.username)
-		//console.log('nombre: ' + socket.username)
+		console.log('nombre: ' + socket.username)
 	})
 
 	// Evento que recibe un mensaje y el usuario que lo envia
@@ -66,6 +66,6 @@ io.sockets.on('connection', function(socket) {
 	socket.on('disconnect', function() {
 		ursConectados--
 		io.sockets.emit('actualizarCantidad', ursConectados)
-		//console.log('Quedan ' + ursConectados)
+		console.log('Quedan ' + ursConectados)
 	})
 })

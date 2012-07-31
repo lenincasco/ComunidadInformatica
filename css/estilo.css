@@ -39,12 +39,23 @@ input[type="text"] {
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
-#messages .avatar,
-#messages .text {
-	display: inline-block;
-	vertical-align: top;
+#messages::-webkit-scrollbar {
+	width: 8px;
+}
+#messages::-webkit-scrollbar-track {
+	background: #bbb;
+}
+#messages::-webkit-scrollbar-thumb {
+	background: #888;
+}
+#messages::-webkit-scrollbar-thumb:hover {
+	background: #777;
+}
+#messages::-webkit-scrollbar-thumb:active {
+	background: #555;
 }
 #messages .avatar {
+	float: left;
 	height: 38px;
 	width: 38px;
 }
@@ -61,19 +72,18 @@ input[type="text"] {
 	border-radius: 4px;
 }
 #messages .text {
-	padding: 0 10px;
+	margin-left: 50px;
 }
 #messages .text a {
 	color: #fff;
-	display: block;
 	font-size: 1.04em;
 	font-weight: 700;
 	letter-spacing: 1px;
-	margin: 2px 0 9px 0;
 	text-decoration: none;
 }
 #messages .text p {
 	font-size: 0.9em;
+	margin-top: 5px;
 }
 #messages li {
 	border-top: 2px solid #666;
