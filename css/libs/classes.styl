@@ -1,0 +1,209 @@
+vendor-prefixes = moz ms o webkit official
+
+// fonts
+/*for font in //aqui los nombres de las fuentes separados por espacios
+    @font-face
+        font-family font
+        src url(fonts/font.ttf) //format(el formato es opcional)*/
+
+// colors
+$black = #33383d
+$green = #7eab41
+
+// img path
+$ipa = "../img/"
+
+display(arg = '')
+    if arg == 'inline-block'
+        display inline-block
+        vertical-align top
+        .lt-ie8 &
+            *display inline
+            *zoom 1
+    else if arg == 'box'
+        display -moz-box
+        display -webkit-box
+        display box
+    else
+        display arg
+
+box-sizing()
+    -moz-box-sizing border-box
+    -webkit-box-sizing border-box
+    box-sizing border-box
+
+border-radius(arg = '')
+    value = arg == '' ? 4px : arguments
+    vendor('border-radius', value)
+
+box-shadow(arg = '')
+    value = arg == '' ? 0 0 5px rgba(#000, 0.10) : arguments
+    vendor('box-shadow', value)
+    -webkit-background-clip padding-box
+
+transition(arg = '')
+    value = arg == '' ? all 0.175s linear : arguments
+    vendor('transition', value)
+
+transform(arg = '')
+    vendor('transform', arguments)
+
+pie()
+    .lt-ie9 &
+        behavior url(libs/PIE.htc)
+
+// labels
+.label
+    border-radius(3px)
+    color #fff
+    font-weight 700
+    padding 4px 7px
+    text-shadow 0 -1px 0 rgba(0, 0, 0, 0.25)
+    white-space nowrap
+    &.default
+        background #888
+        &:hover
+            background #777
+
+// botones
+.button
+    border-radius(3px)
+    color #fff
+    display(inline-block)
+    font-size 0.9em
+    font-weight 700
+    letter-spacing 1px
+    text-align center
+    text-decoration none
+    &:hover
+        color #fff
+//generic
+.generic
+    background #eee
+    background linear-gradient(top, #fff, #e6e6e6)
+    border 1px solid #aaa
+    color #33383D
+    text-shadow white 0 1px 0px
+    &:hover
+        border-color #777
+        color (#33383D / 1.5)
+        text-shadow white 0 1px 0px
+    &:active
+        background #eee
+//green
+.green
+    background #7fbf4d
+    background linear-gradient(top, #7fbf4d, #63a62f)
+    border 1px solid #63a62f
+    border-bottom 1px solid #5b992b
+    box-shadow(inset 0 1px 0 0 #96ca6d)
+    text-shadow 0 -1px 0 #4c9021
+    &:hover
+        background #76b347
+        background linear-gradient(top, #76b347, #5e9e2e)
+        box-shadow(inset 0 1px 0 0 #8dbf67)
+    &:active
+        border 1px solid #5b992b
+        border-bottom 1px solid #538c27
+        box-shadow(inset 0 0 8px 4px #548c29\, 0 1px 0 0 #eeeeee)
+//blue
+.blue
+    background #3A8AC0
+    background linear-gradient(top, #5EA1CF,#3A8AC0)
+    border 1px solid #347BAB
+    box-shadow(rgba(#fff, 0.3) 0 1px 0 inset\, rgba(#000, 0.05) 0 1px 2px)
+    text-shadow rgba(#000, 0.3) 0px -1px 0px
+    &:hover
+        background #4391C6
+        background linear-gradient(top, #6AA8D2,#4391C6)
+    &:active
+        background #3A8AC0
+    &.disabled
+        background (#3A8AC0 / 1.4)
+        cursor default
+//orange
+.orange
+    background #F36C21
+    background linear-gradient(top, #FF7D4F, #E76335)
+    border 1px solid #D06030
+    text-shadow 0 -1px 0 #B4532A
+    &:hover
+        background #FE7840
+        background linear-gradient(top, #FF8754, #E76D3A)
+    &:active
+        background #E76D3A
+        background linear-gradient(top, #E76D3A, #FF8754)
+//end botones
+
+// mensages de error
+.msg
+    background #f9edbe
+    border 1px solid #f0c36d
+    border-radius(0 0 2px 2px)
+    box-shadow(0 2px 4px rgba(#000, 0.1)\, inset 0 2px 2px rgba(#000, 0.065))
+    box-sizing()
+    color $black
+    font-size 0.8em
+    margin-left -25%
+    padding 6px 10px
+    absolute left 50% top 10px
+    width 50%
+    z-index 2
+    &.hidden
+        display none
+        margin-left -25%
+        absolute left 50% top -20px
+        padding 1px 10px 4px 10px
+    p
+        text-align center
+        font-size 1em
+        font-weight 700
+    a
+        display(block)
+    li
+        color $black
+        border-bottom 1px dotted $black
+        font-size 1em
+        font-weight 700
+        margin 10px 0 0 14px
+//end mensages de error
+
+//popup
+.popup
+    background-image url($ipa dialog-border.png)
+    display(none)
+    height 100%
+    fixed left 0 top 0
+    width 100%
+    z-index 30
+
+.popup-dialog
+    background-image url($ipa dialog-border.png)
+    border-radius(9px)
+    box-sizing()
+    margin-left -25%
+    padding 10px
+    absolute left 50% top 50px
+    width 50%
+    z-index 40
+    section
+        background #fff
+        border-radius(9px)
+        padding-bottom 10px
+    .close
+        color #3a8ac0
+        cursor pointer
+        font-size 1.2em
+        font-weight 600
+        absolute right 22px top 22px
+        &:hover
+            color (#3a8ac0 / 1.3)
+    h3
+        color $black
+        font-size 1.2em
+        padding 15px 20px 5px 20px;
+    p
+        color #999
+        font-size 0.9em
+        padding-left 20px
+//end popup
