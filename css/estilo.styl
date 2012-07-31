@@ -1,0 +1,96 @@
+@import 'libs/reset'
+@import 'libs/emoticons'
+
+body
+  background: #272822
+  color: white
+  font: 200 100% "Helvetica Neue", Helvetica, Arial
+  line-height: 1em
+  width: 100%
+
+#chat
+  padding: 10px
+
+#count
+  margin: 5px 0 15px 0
+
+input,
+textarea
+  border: 1px solid #ddd
+  -moz-box-sizing: border-box
+  -webkit-box-sizing: border-box
+  box-sizing: border-box
+  display: block
+  padding: 4px
+
+input[type="text"]
+  margin-bottom: 10px
+  width: 100%
+
+#mensaje
+  height: 60px
+  width: 100%
+
+#messages
+  height: 450px
+  list-style-type: none
+  margin-top: 10px
+  overflow-x: hidden
+  overflow-y: scroll
+
+#messages::-webkit-scrollbar
+  width: 8px
+
+#messages::-webkit-scrollbar-track
+  background: #bbb
+
+#messages::-webkit-scrollbar-thumb
+  background: #888
+
+#messages::-webkit-scrollbar-thumb:hover
+  background: #777
+
+#messages::-webkit-scrollbar-thumb:active
+  background: #555
+
+#messages .avatar
+  float: left
+  height: 38px
+  width: 38px
+
+#messages .avatar a
+  display: block
+  height: 38px
+  width: 38px
+
+#messages .avatar img
+  -moz-border-radius: 4px
+  -ms-border-radius: 4px
+  -o-border-radius: 4px
+  -wevkit-border-radius: 4px
+  border-radius: 4px
+
+#messages .text
+  margin-left: 50px
+
+#messages .text a
+  color: #fff
+  font-size: 1.04em
+  font-weight: 700
+  letter-spacing: 1px
+  text-decoration: none
+
+#messages .text p
+  font-size: 0.9em
+  margin-top: 5px
+
+#messages li
+  border-top: 2px solid #666
+  padding: 10px
+
+#messages li:nth-child(2n+1)
+  background: #333
+
+#messages p
+  border-radius: 5px
+  margin-top: -5px
