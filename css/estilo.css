@@ -309,4 +309,7 @@ input[type="text"] {
   border-radius: 5px;
   margin-top: -5px;
 }
+#pop{
+  display:none;
+}
 >>>>>>> 47328663e72c0fbb8d57e427631422db11e61913

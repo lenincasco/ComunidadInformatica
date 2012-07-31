@@ -5,17 +5,15 @@
 <title>Chat</title>
 <link rel="stylesheet" type="text/css" href="css/estilo.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://192.168.1.141:8080/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
 <script>
 // Almacenar nombre del usuario
 var user
 // Nos conectamos a nuestro servidor Nodejs
-var socket = io.connect('http://192.168.1.141:8080')
+var socket = io.connect('http://localhost:8080')
 
 // Cuando el documento este listo
 $(function() {
-
-	var audio=$('#pop');
 
 	// Obtenemos el nom para el campo donde va el nombre (id="nom")
 	var nombre = $('#nom')
