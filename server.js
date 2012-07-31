@@ -16,7 +16,7 @@ var users = []
 // Para almacenar los mensajes que se envien
 var mensajes = []
 // Para almacenar la hora del mensaje
-var hora=[]
+var horas=[]
 
 // Evento que se produce cuando se conecta un cliente al servidor
 io.sockets.on('connection', function(socket) {
@@ -30,7 +30,7 @@ io.sockets.on('connection', function(socket) {
 	for(var ind = 0; ind < mensajes.length; ind++) {
 		var msj = mensajes[ind]
 		var usr = users[ind]
-		var hor = hora[ind] 
+		var hor = horas[ind] 
 		// emitir usuario y mensaje a la socket conectada
 		socket.emit('msjCon', msj, usr, hor);
 	}
@@ -64,7 +64,7 @@ io.sockets.on('connection', function(socket) {
 		hr = new Date() // Obteniendo la Fecha del Server
 		mensajes.push(mensaje)
 		users.push(usuario)		
-		hora.push(hr.toTimeString()) //Guardandola en formato Time
+		horas.push(hr.toTimeString()) //Guardandola en formato Time
 		usuario = socket.username
 		io.sockets.emit('mensaje', mensaje, usuario, hr.toTimeString())
 	})
