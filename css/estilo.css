@@ -26,16 +26,18 @@ textarea {
 }
 input[type="text"] {
 	margin-bottom: 10px;
-	width: 25%;
+	width: 40%;
 }
 #mensaje {
-	height: 80px;
+	height: 60px;
 	width: 100%;
 }
 #messages {
+	height: 450px;
 	list-style-type: none;
 	margin-top: 10px;
 	overflow-x: hidden;
+	overflow-y: scroll;
 }
 #messages .avatar,
 #messages .text {
