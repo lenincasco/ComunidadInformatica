@@ -1,183 +1,312 @@
-* {
-	margin: 0;
-	padding: 0;
-}
-body {
-	background: #272822;
-	color: white;
-	font: 200 100% "Helvetica Neue", Helvetica, Arial;
-	line-height: 1em;
-	width: 100%;
-}
-#chat {
-	padding: 10px;
-}
-#count {
-	margin: 5px 0 15px 0;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 input,
 textarea {
-	border: 1px solid #ddd;
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	display: block;
-	padding: 4px;
+  outline: none;
 }
-input[type="text"] {
-	margin-bottom: 10px;
-	width: 40%;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
 }
-#mensaje {
-	height: 60px;
-	width: 100%;
+body {
+  line-height: 1;
 }
-#messages {
-	height: 450px;
-	list-style-type: none;
-	margin-top: 10px;
-	overflow-x: hidden;
-	overflow-y: scroll;
+ol,
+ul {
+  list-style: none;
 }
-#messages::-webkit-scrollbar {
-	width: 8px;
+blockquote,
+q {
+  quotes: none;
 }
-#messages::-webkit-scrollbar-track {
-	background: #bbb;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none;
 }
-#messages::-webkit-scrollbar-thumb {
-	background: #888;
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-#messages::-webkit-scrollbar-thumb:hover {
-	background: #777;
+img{display:block;height:auto;width:100%;width:auto\9;}
+strong {
+  font-weight: 700;
 }
-#messages::-webkit-scrollbar-thumb:active {
-	background: #555;
-}
-#messages .avatar {
-	float: left;
-	height: 38px;
-	width: 38px;
-}
-#messages .avatar a {
-	display: block;
-	height: 38px;
-	width: 38px;
-}
-#messages .avatar img {
-	-moz-border-radius: 4px;
-	-ms-border-radius: 4px;
-	-o-border-radius: 4px;
-	-wevkit-border-radius: 4px;
-	border-radius: 4px;
-}
-#messages .text {
-	margin-left: 50px;
-}
-#messages .text a {
-	color: #fff;
-	font-size: 1.04em;
-	font-weight: 700;
-	letter-spacing: 1px;
-	text-decoration: none;
-}
-#messages .text p {
-	font-size: 0.9em;
-	margin-top: 5px;
-}
-#messages li {
-	border-top: 2px solid #666;
-	padding: 10px;
-}
-#messages li:nth-child(2n+1) {
-	background: #333;
-}
-#messages p {
-	border-radius: 5px;
-	margin-top: -5px;
-}
-
-/* emoticones */
 .emoticon {
-	background: url(../img/emoticons.png) no-repeat left top;
-	display: inline-block;
-	height: 16px;
-	position: relative;
-	top: 3px;
-	width: 16px;
+  background: url("../img/emoticons.png") no-repeat left top;
+  display: inline-block;
+  height: 16px;
+  position: relative;
+  top: 3px;
+  width: 16px;
 }
 .emoticon[title=":)"] {
-	background-position: 0 0;
+  background-position: 0 0;
 }
 .emoticon[title=":("] {
-	background-position: -16px 0px;
+  background-position: -16px 0px;
 }
 .emoticon[title=":p"],
 .emoticon[title=":P"] {
-	background-position: -32px 0;
+  background-position: -32px 0;
 }
 .emoticon[title=":D"] {
-	background-position: -48px 0;
+  background-position: -48px 0;
 }
 .emoticon[title=":o"],
 .emoticon[title=":O"] {
-	background-position: -64px 0;
+  background-position: -64px 0;
 }
 .emoticon[title=";)"] {
-	background-position: -80px 0px;
+  background-position: -80px 0px;
 }
 .emoticon[title="8)"] {
-	background-position: -96px 0px;
+  background-position: -96px 0px;
 }
 .emoticon[title="B|"] {
-	background-position: -112px 0px
+  background-position: -112px 0px;
 }
 .emoticon[title=">:("] {
-	background-position: -128px 0px
+  background-position: -128px 0px;
 }
 .emoticon[title=":/"] {
-	background-position: -144px 0px
+  background-position: -144px 0px;
 }
 .emoticon[title=":'("] {
-	background-position: -160px 0px
+  background-position: -160px 0px;
 }
 .emoticon[title="3:)"] {
-	background-position: -176px 0px
+  background-position: -176px 0px;
 }
 .emoticon[title="o:)"],
 .emoticon[title="O:)"] {
-	background-position: -192px 0px
+  background-position: -192px 0px;
 }
 .emoticon[title=":*"] {
-	background-position: -208px 0px
+  background-position: -208px 0px;
 }
 .emoticon[title="<3"] {
-	background-position: -224px 0px
+  background-position: -224px 0px;
 }
 .emoticon[title="^_^"] {
-	background-position: -240px 0px
+  background-position: -240px 0px;
 }
 .emoticon[title="-_-"] {
-	background-position: -256px 0px
+  background-position: -256px 0px;
 }
 .emoticon[title="o.O"] {
-	background-position: -272px 0px
+  background-position: -272px 0px;
 }
 .emoticon[title=">.<"] {
-	background-position: -288px 0px
+  background-position: -288px 0px;
 }
 .emoticon[title=":v"],
 .emoticon[title=":V"] {
-	background-position: -304px 0px
+  background-position: -304px 0px;
 }
 .emoticon[title=":3"] {
-	background-position: -320px 0px
+  background-position: -320px 0px;
 }
 .emoticon[title="(y)"],
 .emoticon[title="(Y)"] {
+<<<<<<< HEAD
 	background-position: -336px 0px
 }
 
 #pop{
 	display:none;
 }
+=======
+  background-position: -336px 0px;
+}
+body {
+  background: #272822;
+  color: #fff;
+  font: 200 100% "Helvetica Neue", Helvetica, Arial;
+  line-height: 1em;
+  width: 100%;
+}
+#chat {
+  padding: 10px;
+}
+#count {
+  margin: 5px 0 15px 0;
+}
+input,
+textarea {
+  border: 1px solid #ddd;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  padding: 4px;
+}
+input[type="text"] {
+  margin-bottom: 10px;
+  width: 100%;
+}
+#mensaje {
+  height: 60px;
+  width: 100%;
+}
+#messages {
+  height: 450px;
+  list-style-type: none;
+  margin-top: 10px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#messages::-webkit-scrollbar {
+  width: 8px;
+}
+#messages::-webkit-scrollbar-track {
+  background: #bbb;
+}
+#messages::-webkit-scrollbar-thumb {
+  background: #888;
+}
+#messages::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+#messages::-webkit-scrollbar-thumb:active {
+  background: #555;
+}
+#messages .avatar {
+  float: left;
+  height: 38px;
+  width: 38px;
+}
+#messages .avatar a {
+  display: block;
+  height: 38px;
+  width: 38px;
+}
+#messages .avatar img {
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  -wevkit-border-radius: 4px;
+  border-radius: 4px;
+}
+#messages .text {
+  margin-left: 50px;
+}
+#messages .text a {
+  color: #fff;
+  font-size: 1.04em;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+}
+#messages .text p {
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+#messages li {
+  border-top: 2px solid #666;
+  padding: 10px;
+}
+#messages li:nth-child(2n+1) {
+  background: #333;
+}
+#messages p {
+  border-radius: 5px;
+  margin-top: -5px;
+}
+>>>>>>> 47328663e72c0fbb8d57e427631422db11e61913
