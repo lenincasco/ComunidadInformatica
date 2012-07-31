@@ -177,3 +177,7 @@ input[type="text"] {
 .emoticon[title="(Y)"] {
 	background-position: -336px 0px
 }
+
+#pop{
+	display:none;
+}

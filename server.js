@@ -15,6 +15,8 @@ var usuarios = []
 var users = []
 // Para almacenar los mensajes que se envien
 var mensajes = []
+// Para almacenar la hora del mensaje
+var hora=[]
 
 // Evento que se produce cuando se conecta un cliente al servidor
 io.sockets.on('connection', function(socket) {
@@ -28,8 +30,9 @@ io.sockets.on('connection', function(socket) {
 	for(var ind = 0; ind < mensajes.length; ind++) {
 		var msj = mensajes[ind]
 		var usr = users[ind]
+		var hor = hora[ind] 
 		// emitir usuario y mensaje a la socket conectada
-		socket.emit('msjCon', msj, usr)
+		socket.emit('msjCon', msj, usr, hor);
 	}
 
 	// Cuando se de el evento 'nombre' recibiremos el nombre del cliente
@@ -38,6 +41,7 @@ io.sockets.on('connection', function(socket) {
 		console.log('Nombre conectado: ' + nombre);
 		for (var i = 0; i < usuarios.length; i++) {
 			if (usuarios[i] === nombre) {
+				console.log(usuarios[i] + ' = ' + nombre)
 				delete usuarios[i]
 			}
 		}
@@ -56,16 +60,17 @@ io.sockets.on('connection', function(socket) {
 	// Evento que recibe un mensaje y el usuario que lo envia
 	// guardamos el mensaje y actualizamos el nombre del usuario
 	// Emitimos a todas las sockets el mensaje y el usuario que lo envio
-	socket.on('mensaje', function(mensaje, usuario) {
+	socket.on('mensaje', function(mensaje, usuario, hr) {
+		hr = new Date() // Obteniendo la Fecha del Server
 		mensajes.push(mensaje)
-		users.push(usuario)
+		users.push(usuario)		
+		hora.push(hr.toTimeString()) //Guardandola en formato Time
 		usuario = socket.username
-		io.sockets.emit('mensaje', mensaje, usuario)
+		io.sockets.emit('mensaje', mensaje, usuario, hr.toTimeString())
 	})
 
 	socket.on('disconnect', function() {
 		ursConectados--
 		io.sockets.emit('actualizarCantidad', ursConectados)
-		console.log('Quedan ' + ursConectados)
 	})
 })

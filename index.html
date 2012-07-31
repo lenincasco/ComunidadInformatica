@@ -5,15 +5,18 @@
 <title>Chat</title>
 <link rel="stylesheet" type="text/css" href="css/estilo.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
-<script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="http://192.168.1.141:8080/socket.io/socket.io.js"></script>
 <script>
 // Almacenar nombre del usuario
 var user
 // Nos conectamos a nuestro servidor Nodejs
-var socket = io.connect('http://localhost:8080')
+var socket = io.connect('http://192.168.1.141:8080')
 
 // Cuando el documento este listo
 $(function() {
+
+	var audio=$('#pop');
+
 	// Obtenemos el nom para el campo donde va el nombre (id="nom")
 	var nombre = $('#nom')
 	// Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
@@ -53,7 +56,7 @@ $(function() {
 	$('#mensaje').on('keyup', function(e) {
 		if(e.which == 13) {
 			e.preventDefault()
-			// Si el campo nombre no esta vacio
+			// Si el campo nombre no esta vacio			
 			if (nombre.val()) {
 				// Enviamos el mensaje al servidor por la funcion 'mensaje'
 				socket.emit('mensaje', mensaje.val(), user)
@@ -66,7 +69,10 @@ $(function() {
 	})
 
 	//Cuando se de el evento mensaje
-	socket.on('mensaje', function(mensaje, usuario) {
+	socket.on('mensaje', function(mensaje, usuario, hora) {
+		console.log('hora: ' + hora);
+		var sonido=document.getElementById('pop');
+			sonido.play();
 		$('#messages').prepend('\
 			<li>\
 				<div class="avatar">\
@@ -80,7 +86,8 @@ $(function() {
 	})
 
 	//Este evento hace lo mismo que la funcion mensaje pero, se da cuando se conecta un usuario nuevo
-	socket.on('msjCon', function(mensaje, usuario) {
+	socket.on('msjCon', function(mensaje, usuario, hora) {
+		console.log('hora: ' + hora);
 		$('#messages').prepend('\
 			<li>\
 				<div class="avatar">\
@@ -104,6 +111,9 @@ replaceEmoticon = function(mensaje) {
 </script>
 </head>
 <body>
+	<audio id="pop" controls="controls">
+		<source src="sonido/sonido.mp3" type="audio/mp3"/>
+	</audio>
 	<div id="chat">
 		<p id="count">Usuarios Conectados: <strong id="cantU"></strong></p>
 		<form id="formulario" action="">
