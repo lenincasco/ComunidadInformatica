@@ -521,7 +521,6 @@ input[type="text"] {
 }
 #messages {
   height: 450px;
-  margin-top: 10px;
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -541,7 +540,7 @@ input[type="text"] {
   background: #555;
 }
 #messages li {
-  margin: 0 auto 15px auto;
+  margin: 10px auto 10px auto;
   width: 98%;
 }
 #messages li:nth-child(2n+1) .text {
