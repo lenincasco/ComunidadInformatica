@@ -1,3 +1,7 @@
+// mensajes sin leer
+var unread = 0
+var focus = true
+
 util = {
     zeroPad: function (digits, n) {
         n = n.toString()
@@ -34,20 +38,37 @@ util = {
 
     replaceEmoticon: function(mensaje) {
         return mensaje.replace(/(:\)|:\(|:p|:P|:D|:o|:O|;\)|8\)|B\||>:\(|:\/|:'\(|3:\)|o:\)|O:\)|:\*|<3|\^_\^|-_-|o.O|>.<|:v|:V|:3|\(y\)|\(Y\))/g, '<span title="$1" class="emoticon"></span>')
+    },
+
+    updateTitle: function() {
+        if (unread) {
+            document.title = '(' + unread.toString() + ') chat'
+        } else {
+            document.title = 'Chat'
+        }
     }
 }
 
-// Almacenar nombre del usuario
-var user
-// Nos conectamos a nuestro servidor Nodejs
-var socket = io.connect('http://localhost:8080')
-
 // Cuando el documento este listo
 $(function() {
+    // Nos conectamos a nuestro servidor Nodejs
+    var socket = io.connect('http://localhost:8080')
+    // Almacenar nombre del usuario
+    var user
     // Obtenemos el nom para el campo donde va el nombre (id="nom")
     var nombre = $('#nom')
     // Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
     var mensaje = $('#mensaje')
+    // detectar el blur y el focus en el window
+    $(window).on('blur', function() {
+        focus = false
+        util.updateTitle()
+    })
+    $(window).bind('focus', function() {
+        focus = true
+        unread = 0
+        util.updateTitle()
+    })
     // si ya se habia conectado y por alguna razon recargo la pagina volvemos a poner su usario
     // el cual esta almacenado localmente
     if (localStorage.userName) {
@@ -92,15 +113,18 @@ $(function() {
                 // si en local no tenemos almacenado el nombre de usuario, se almacena
                 if (!localStorage.userName) {
                     localStorage.userName = user
-                }
-            }
+                }            }
         }
     })
 
     //Cuando se de el evento mensaje
     socket.on('mensaje', function(usuario, mensaje, time) {
         if (mensaje === null) return
+        if(!focus) unread++
+        util.updateTitle()
 
+        var sonido = document.getElementById('pop')
+        sonido.play()
         $('#messages').prepend('\
             <li>\
                 <div class="avatar">\
