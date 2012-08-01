@@ -15,10 +15,8 @@ body
     display none
 #chat
     padding 10px
-
 #count
     margin 5px 0 15px 0
-
 input,
 textarea
     border 1px solid #ddd
@@ -29,14 +27,11 @@ textarea
 input[type="text"]
     margin-bottom 10px
     width 100%
-
 #mensaje
     height 60px
     width 100%
-
 #messages
     height 450px
-    overflow-x hidden
     overflow-y scroll
     &::-webkit-scrollbar
         width 8px
@@ -50,27 +45,28 @@ input[type="text"]
         background #555
     li
         margin 10px auto 10px auto
+        overflow hidden
         width 98%
         &:nth-child(2n+1) .text
             background #bfd8dd
             background linear-gradient(top, #bfd8dd, #94b1b9)
             box-shadow(inset 0 2px 2px #e1eaef\, 0 1px 2px #a3b7be)
-            &:after
-                border-color transparent rgba(#bfd8dd, 0.8) transparent transparent
             p
                 text-shadow 0 1px 1px #f1f1f1
         &:nth-child(2n+2) .text
             background #7b919c
             background linear-gradient(top, #7b919c, #6a7a8a)
             box-shadow(inset 0 2px 2px #a8b6bf\, 0 1px 2px #44505c)
-            &:after
-                border-color transparent rgba(#7b919c, 0.8) transparent transparent
             p
                 text-shadow 0 1px 1px #ccc
     .avatar
         background #272822
+        border 10px solid #272822
+        border-left-width 0
+        border-radius(50%)
         float left
         height 48px
+        relative top -5px
         width 48px
         a
             display block
@@ -81,14 +77,8 @@ input[type="text"]
             box-shadow(0 0 6px #a3b7be)
     .text
         border-radius(16px)
-        margin-left 70px
-        padding 10px
-        position relative
-        &:after
-            border-width 15px
-            border-style solid
-            content ''
-            absolute left -29px top 12px
+        padding 10px 10px 10px 60px
+        margin-left 5px
         a
             color #fff
             font-size 0.945em

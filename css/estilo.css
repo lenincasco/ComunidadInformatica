@@ -521,7 +521,6 @@ input[type="text"] {
 }
 #messages {
   height: 450px;
-  overflow-x: hidden;
   overflow-y: scroll;
 }
 #messages::-webkit-scrollbar {
@@ -541,6 +540,7 @@ input[type="text"] {
 }
 #messages li {
   margin: 10px auto 10px auto;
+  overflow: hidden;
   width: 98%;
 }
 #messages li:nth-child(2n+1) .text {
@@ -557,9 +557,6 @@ input[type="text"] {
   -webkit-box-shadow: inset 0 2px 2px #e1eaef , 0 1px 2px #a3b7be;
   box-shadow: inset 0 2px 2px #e1eaef , 0 1px 2px #a3b7be;
   -webkit-background-clip: padding-box;
-}
-#messages li:nth-child(2n+1) .text:after {
-  border-color: transparent rgba(191,216,221,0.8) transparent transparent;
 }
 #messages li:nth-child(2n+1) .text p {
   text-shadow: 0 1px 1px #f1f1f1;
@@ -579,16 +576,23 @@ input[type="text"] {
   box-shadow: inset 0 2px 2px #a8b6bf , 0 1px 2px #44505c;
   -webkit-background-clip: padding-box;
 }
-#messages li:nth-child(2n+2) .text:after {
-  border-color: transparent rgba(123,145,156,0.8) transparent transparent;
-}
 #messages li:nth-child(2n+2) .text p {
   text-shadow: 0 1px 1px #ccc;
 }
 #messages .avatar {
   background: #272822;
+  border: 10px solid #272822;
+  border-left-width: 0;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  border-radius: 50%;
   float: left;
   height: 48px;
+  position: relative;
+  top: -5px;
+  ((null)): 0;
   width: 48px;
 }
 #messages .avatar a {
@@ -615,17 +619,8 @@ input[type="text"] {
   -o-border-radius: 16px;
   -webkit-border-radius: 16px;
   border-radius: 16px;
-  margin-left: 70px;
-  padding: 10px;
-  position: relative;
-}
-#messages .text:after {
-  border-width: 15px;
-  border-style: solid;
-  content: '';
-  position: absolute;
-  left: -29px;
-  top: 12px;
+  padding: 10px 10px 10px 60px;
+  margin-left: 5px;
 }
 #messages .text a {
   color: #fff;

@@ -1,8 +1,9 @@
-// mensajes sin leer
-var unread = 0
-var focus = true
-
+// funciones utiles
 util = {
+    // mensajes sin leer
+    unread: 0,
+    focus: true,
+    // agregar ceros al inicio
     zeroPad: function (digits, n) {
         n = n.toString()
         while (n.length < digits)
@@ -12,15 +13,15 @@ util = {
 
     timeString: function (date) {
         if (date == null) {
-            // si el tiempo es nulo usar el tiempo actual
+            // si el tiempo es nulo, usar el tiempo actual
             date = new Date();
         } else if ((date instanceof Date) === false) {
             // si es un timestamp, se imterpreta
             date = new Date(date);
         }
 
-        var minutes = date.getMinutes()
-        var hours = date.getHours()
+        var minutes = date.getMinutes().toString()
+        var hours = date.getHours().toString()
         var txt = 'AM'
 
         if (hours > 12) {
@@ -41,8 +42,8 @@ util = {
     },
 
     updateTitle: function() {
-        if (unread) {
-            document.title = '(' + unread.toString() + ') chat'
+        if (util.unread) {
+            document.title = '(' + util.unread.toString() + ') chat'
         } else {
             document.title = 'Chat'
         }
@@ -61,12 +62,12 @@ $(function() {
     var mensaje = $('#mensaje')
     // detectar el blur y el focus en el window
     $(window).on('blur', function() {
-        focus = false
+        util.focus = false
         util.updateTitle()
     })
-    $(window).bind('focus', function() {
-        focus = true
-        unread = 0
+    $(window).on('focus', function() {
+        util.focus = true
+        util.unread = 0
         util.updateTitle()
     })
     // si ya se habia conectado y por alguna razon recargo la pagina volvemos a poner su usario
@@ -103,7 +104,7 @@ $(function() {
 
     //Cuando se da enter la caja de mensaje
     $('#mensaje').on('keyup', function(e) {
-        if(e.which == 13) {
+        if(e.which === 13) {
             e.preventDefault()
             // Si el campo nombre no esta vacio
             if (nombre.val()) {
@@ -113,14 +114,15 @@ $(function() {
                 // si en local no tenemos almacenado el nombre de usuario, se almacena
                 if (!localStorage.userName) {
                     localStorage.userName = user
-                }            }
+                }
+            }
         }
     })
 
     //Cuando se de el evento mensaje
     socket.on('mensaje', function(usuario, mensaje, time) {
-        if (mensaje === null) return
-        if(!focus) unread++
+        if (util.isBlank(mensaje)) return
+        if(!util.focus) util.unread++
         util.updateTitle()
 
         var sonido = document.getElementById('pop')
@@ -131,7 +133,7 @@ $(function() {
                     <a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank"><img src="https://api.twitter.com/1/users/profile_image?screen_name=' + usuario + '&size=normal" alt="&#64;' + usuario + '" height="48" width="48"></a>\
                 </div>\
                 <div class="text">\
-                    <!--<a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank">&#64;' + usuario + '</a>-->\
+                    <a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank">&#64;' + usuario + '</a>\
                     <time>' + util.timeString(time) + '</time>\
                     <p>' + util.replaceEmoticon(mensaje) + '</p>\
                 </div>\
