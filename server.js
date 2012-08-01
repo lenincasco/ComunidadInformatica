@@ -28,13 +28,13 @@ io.sockets.on('connection', function(socket) {
         var msj = mensajes[ind].mensaje
         var time = mensajes[ind].timestamp
         // emitir usuario y mensaje a la socket conectada
-        socket.emit('msjCon', usr, msj, time)
+
+        socket.emit('msjCon', msj, usr, time)
     }
 
     // Cuando se de el evento 'nombre' recibiremos el nombre del cliente
     // y lo almacenamos en 'usuarios' y tambien en la propiedad username de la socket
     socket.on('nombre', function(nombre) {
-        console.log('Nombre conectado: ' + nombre);
         for (var i = 0; i < usuarios.length; i++) {
             if (usuarios[i] === nombre) {
                 delete usuarios[i]
@@ -64,7 +64,26 @@ io.sockets.on('connection', function(socket) {
         mensajes.push(m)
         usuario = socket.username
         time = m.timestamp
-        io.sockets.emit('mensaje', usuario, mensaje, time)
+        io.sockets.emit('mensaje', mensaje, usuario, time)
+    })
+
+    socket.on('disconnect', function() {
+        ursConectados--
+        io.sockets.emit('actualizarCantidad', ursConectados)
+        console.log('Quedan Conectados' + ursConectados)
+    // Evento que recibe un mensaje y el usuario que lo envia
+    // guardamos el mensaje y actualizamos el nombre del usuario
+    // Emitimos a todas las sockets el mensaje y el usuario que lo envio
+    socket.on('mensaje', function(mensaje, usuario) {
+        m = {
+            usuario: usuario,
+            mensaje: mensaje,
+            timestamp: (new Date()).getTime()
+        }
+        mensajes.push(m)
+        usuario = socket.username
+        time = m.timestamp
+        io.sockets.emit('mensaje', mensaje, usuario, time)
     })
 
     socket.on('disconnect', function() {
