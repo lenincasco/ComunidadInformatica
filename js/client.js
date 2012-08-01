@@ -11,6 +11,21 @@ util = {
         return n
     },
 
+    salir: function(){
+        var nombre = $('#nom')
+        var logout=$('#logout')
+        console.log('loging out')
+       if(localStorage.userName){
+            localStorage.userName=null
+            nombre.val('')          
+            nombre.attr('disabled', false)
+            nombre.focus()
+            logout.hide("slow")
+            console.log('remover username ' + localStorage.userName)
+       }
+    },
+
+
     timeString: function (date) {
         if (date == null) {
             // si el tiempo es nulo, usar el tiempo actual
@@ -25,11 +40,11 @@ util = {
         var txt = 'AM'
 
         if (hours > 12) {
-            hour = hours - 12
+            hours = hours - 12
             txt = 'PM'
         }
 
-        return this.zeroPad(2, hour) + ":" + this.zeroPad(2, minutes) + ' ' + txt
+        return this.zeroPad(2, hours) + ":" + this.zeroPad(2, minutes) + ' ' + txt
     },
 
     isBlank: function(text) {
@@ -53,13 +68,20 @@ util = {
 // Cuando el documento este listo
 $(function() {
     // Nos conectamos a nuestro servidor Nodejs
-    var socket = io.connect('http://localhost:8080')
+    var socket = io.connect('http://192.168.1.141:8080')
     // Almacenar nombre del usuario
     var user
     // Obtenemos el nom para el campo donde va el nombre (id="nom")
     var nombre = $('#nom')
     // Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
     var mensaje = $('#mensaje')
+
+    var logout = $('#logout')
+
+    $('#salir').on('click', function(){
+        util.salir();
+    })
+
     // detectar el blur y el focus en el window
     $(window).on('blur', function() {
         util.focus = false
@@ -72,13 +94,16 @@ $(function() {
     })
     // si ya se habia conectado y por alguna razon recargo la pagina volvemos a poner su usario
     // el cual esta almacenado localmente
-    if (localStorage.userName) {
+    if (localStorage.userName !== "null") { //Comprobamos si no es null, para que no nos ponga un objeto nulo en el campo nombre
         nombre.val(localStorage.userName)
         user = localStorage.userName
         socket.emit('nombre', user)
         nombre.attr('disabled', true)
         mensaje.focus()
-    }
+    }else
+        {
+          logout.hide()
+        }
 
     // Cuando pierda el foco el campo nombre
     nombre.on('focusout', function() {
@@ -91,6 +116,10 @@ $(function() {
             user = nombre.val()
             // Hacemos un llamado al servidor con la funcion 'nombre' y le pasamos el nombre
             socket.emit('nombre', user)
+
+            logout.show("slow") // Una vez logueado mostrar el boton de salir
+
+            localStorage.userName=user
         }
     })
 
@@ -120,7 +149,7 @@ $(function() {
     })
 
     //Cuando se de el evento mensaje
-    socket.on('mensaje', function(usuario, mensaje, time) {
+    socket.on('mensaje', function(mensaje, usuario, time) {
         if (util.isBlank(mensaje)) return
         if(!util.focus) util.unread++
         util.updateTitle()
@@ -141,7 +170,7 @@ $(function() {
     })
 
     //Este evento hace lo mismo que la funcion mensaje pero, se da cuando se conecta un usuario nuevo
-    socket.on('msjCon', function(usuario, mensaje, time) {
+    socket.on('msjCon', function(mensaje, usuario, time) {
         $('#messages').prepend('\
             <li>\             <div class="avatar">\
                     <a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank"><img src="https://api.twitter.com/1/users/profile_image?screen_name=' + usuario + '&size=normal" alt="&#64;' + usuario + '" height="48" width="48"></a>\
@@ -157,4 +186,6 @@ $(function() {
     socket.on('actualizarCantidad', function(cantidad) {
         $('#cantU').text(cantidad)
     })
+
+
 })
