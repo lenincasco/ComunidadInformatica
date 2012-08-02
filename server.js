@@ -73,24 +73,4 @@ io.sockets.on('connection', function(socket) {
         io.sockets.emit('actualizarCantidad', ursConectados)
         console.log('Quedan Conectados' + ursConectados)
     })
-    // Evento que recibe un mensaje y el usuario que lo envia
-    // guardamos el mensaje y actualizamos el nombre del usuario
-    // Emitimos a todas las sockets el mensaje y el usuario que lo envio
-    socket.on('mensaje', function(mensaje, usuario) {
-        m = {
-            usuario: usuario,
-            mensaje: mensaje,
-            timestamp: (new Date()).getTime()
-        }
-        mensajes.push(m)
-        usuario = socket.username
-        time = m.timestamp
-        io.sockets.emit('mensaje', mensaje, usuario, time)
-    })
-
-    socket.on('disconnect', function() {
-        ursConectados--
-        io.sockets.emit('actualizarCantidad', ursConectados)
-        console.log('Quedan ' + ursConectados)
-    })
 })

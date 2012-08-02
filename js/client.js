@@ -11,20 +11,19 @@ util = {
         return n
     },
 
-    salir: function(){
+    salir: function() {
         var nombre = $('#nom')
-        var logout=$('#logout')
+        var logout = $('#logout')
         console.log('loging out')
-       if(localStorage.userName){
-            localStorage.userName=null
+        if (localStorage.userName) {
+            console.log('remover username ' + localStorage.userName)
+            localStorage.removeItem('userName')
             nombre.val('')          
             nombre.attr('disabled', false)
             nombre.focus()
-            logout.hide("slow")
-            console.log('remover username ' + localStorage.userName)
-       }
+            logout.hide('slow')
+        }
     },
-
 
     timeString: function (date) {
         if (date == null) {
@@ -57,8 +56,8 @@ util = {
     },
 
     updateTitle: function() {
-        if (util.unread) {
-            document.title = '(' + util.unread.toString() + ') chat'
+        if (this.unread) {
+            document.title = '(' + this.unread.toString() + ') chat'
         } else {
             document.title = 'Chat'
         }
@@ -68,18 +67,17 @@ util = {
 // Cuando el documento este listo
 $(function() {
     // Nos conectamos a nuestro servidor Nodejs
-    var socket = io.connect('http://192.168.1.141:8080')
+    var socket = io.connect('http://localhost:8080')
     // Almacenar nombre del usuario
     var user
     // Obtenemos el nom para el campo donde va el nombre (id="nom")
     var nombre = $('#nom')
     // Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
     var mensaje = $('#mensaje')
-
     var logout = $('#logout')
 
-    $('#salir').on('click', function(){
-        util.salir();
+    $('#salir').on('click', function() {
+        util.salir()
     })
 
     // detectar el blur y el focus en el window
@@ -94,21 +92,21 @@ $(function() {
     })
     // si ya se habia conectado y por alguna razon recargo la pagina volvemos a poner su usario
     // el cual esta almacenado localmente
-    if (localStorage.userName !== "null") { //Comprobamos si no es null, para que no nos ponga un objeto nulo en el campo nombre
+    // Comprobamos si no es null, para que no nos ponga un objeto nulo en el campo nombre
+    if (localStorage.userName) {
         nombre.val(localStorage.userName)
         user = localStorage.userName
         socket.emit('nombre', user)
         nombre.attr('disabled', true)
         mensaje.focus()
-    }else
-        {
-          logout.hide()
-        }
+    } else {
+        logout.hide()
+    }
 
     // Cuando pierda el foco el campo nombre
     nombre.on('focusout', function() {
         // Validar si se ha escrito algo
-        if ($(this).val() !== '') {
+        if ($(this).val()) {
             // se desabilita el campo para no cambiar el nombre de suario
             $(this).attr('disabled', true)
             // Si se escribio
@@ -116,10 +114,12 @@ $(function() {
             user = nombre.val()
             // Hacemos un llamado al servidor con la funcion 'nombre' y le pasamos el nombre
             socket.emit('nombre', user)
-
-            logout.show("slow") // Una vez logueado mostrar el boton de salir
-
-            localStorage.userName=user
+            // Una vez logueado mostrar el boton de salir
+            logout.show('slow')
+            // si en local no tenemos almacenado el nombre de usuario, se almacena
+            if (!localStorage.userName) {
+                localStorage.userName = user
+            }
         }
     })
 
@@ -136,14 +136,10 @@ $(function() {
         if(e.which === 13) {
             e.preventDefault()
             // Si el campo nombre no esta vacio
-            if (nombre.val()) {
+            if (nombre.val() && !util.isBlank(mensaje.val())) {
                 // Enviamos el mensaje al servidor por la funcion 'mensaje'
                 socket.emit('mensaje', mensaje.val(), user)
                 mensaje.val('')
-                // si en local no tenemos almacenado el nombre de usuario, se almacena
-                if (!localStorage.userName) {
-                    localStorage.userName = user
-                }
             }
         }
     })
@@ -186,6 +182,4 @@ $(function() {
     socket.on('actualizarCantidad', function(cantidad) {
         $('#cantU').text(cantidad)
     })
-
-
 })

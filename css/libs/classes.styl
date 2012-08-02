@@ -52,23 +52,11 @@ pie()
     .lt-ie9 &
         behavior url(libs/PIE.htc)
 
-// labels
-.label
-    border-radius(3px)
-    color #fff
-    font-weight 700
-    padding 4px 7px
-    text-shadow 0 -1px 0 rgba(0, 0, 0, 0.25)
-    white-space nowrap
-    &.default
-        background #888
-        &:hover
-            background #777
-
 // botones
 .button
     border-radius(3px)
     color #fff
+    cursor pointer
     display(inline-block)
     font-size 0.9em
     font-weight 700
@@ -134,76 +122,3 @@ pie()
         background #E76D3A
         background linear-gradient(top, #E76D3A, #FF8754)
 //end botones
-
-// mensages de error
-.msg
-    background #f9edbe
-    border 1px solid #f0c36d
-    border-radius(0 0 2px 2px)
-    box-shadow(0 2px 4px rgba(#000, 0.1)\, inset 0 2px 2px rgba(#000, 0.065))
-    box-sizing()
-    color $black
-    font-size 0.8em
-    margin-left -25%
-    padding 6px 10px
-    absolute left 50% top 10px
-    width 50%
-    z-index 2
-    &.hidden
-        display none
-        margin-left -25%
-        absolute left 50% top -20px
-        padding 1px 10px 4px 10px
-    p
-        text-align center
-        font-size 1em
-        font-weight 700
-    a
-        display(block)
-    li
-        color $black
-        border-bottom 1px dotted $black
-        font-size 1em
-        font-weight 700
-        margin 10px 0 0 14px
-//end mensages de error
-
-//popup
-.popup
-    background-image url($ipa dialog-border.png)
-    display(none)
-    height 100%
-    fixed left 0 top 0
-    width 100%
-    z-index 30
-
-.popup-dialog
-    background-image url($ipa dialog-border.png)
-    border-radius(9px)
-    box-sizing()
-    margin-left -25%
-    padding 10px
-    absolute left 50% top 50px
-    width 50%
-    z-index 40
-    section
-        background #fff
-        border-radius(9px)
-        padding-bottom 10px
-    .close
-        color #3a8ac0
-        cursor pointer
-        font-size 1.2em
-        font-weight 600
-        absolute right 22px top 22px
-        &:hover
-            color (#3a8ac0 / 1.3)
-    h3
-        color $black
-        font-size 1.2em
-        padding 15px 20px 5px 20px;
-    p
-        color #999
-        font-size 0.9em
-        padding-left 20px
-//end popup
