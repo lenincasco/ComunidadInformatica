@@ -16,6 +16,7 @@ var mensajes = []
 
 // Evento que se produce cuando se conecta un cliente al servidor
 io.sockets.on('connection', function(socket) {
+
     console.log('Nueva Socket Conectada ' + socket.id)
     ursConectados++
     // Emitir a todos la cantidad de usuarios conectados
@@ -71,6 +72,7 @@ io.sockets.on('connection', function(socket) {
         ursConectados--
         io.sockets.emit('actualizarCantidad', ursConectados)
         console.log('Quedan Conectados' + ursConectados)
+    })
     // Evento que recibe un mensaje y el usuario que lo envia
     // guardamos el mensaje y actualizamos el nombre del usuario
     // Emitimos a todas las sockets el mensaje y el usuario que lo envio
