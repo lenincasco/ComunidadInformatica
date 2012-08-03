@@ -400,7 +400,7 @@ input[type="text"] {
   width: 100%;
 }
 #messages {
-  background: #eaeaea;
+  height: 450px;
   overflow-y: scroll;
 }
 #messages::-webkit-scrollbar {
@@ -420,20 +420,40 @@ input[type="text"] {
 }
 #messages li {
   margin: 10px auto 0 auto;
+  overflow: hidden;
   position: relative;
   width: 98%;
 }
+#messages li:nth-child(2n+1) .text {
+  background: #333;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #333), color-stop(1, #444));
+  background: -moz-linear-gradient(top, #333 0%, #444 100%);
+  background: -ms-linear-gradient(top, #333 0%, #444 100%);
+  background: -o-linear-gradient(top, #333 0%, #444 100%);
+  background: -webkit-linear-gradient(top, #333 0%, #444 100%);
+  background: linear-gradient(top, #333 0%, #444 100%);
+}
+#messages li:nth-child(2n+2) .text {
+  background: #666;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #444), color-stop(1, #333));
+  background: -moz-linear-gradient(top, #444 0%, #333 100%);
+  background: -ms-linear-gradient(top, #444 0%, #333 100%);
+  background: -o-linear-gradient(top, #444 0%, #333 100%);
+  background: -webkit-linear-gradient(top, #444 0%, #333 100%);
+  background: linear-gradient(top, #444 0%, #333 100%);
+}
 #messages .avatar {
   background: #272822;
-  -moz-border-radius: 50%;
-  -ms-border-radius: 50%;
-  -o-border-radius: 50%;
-  -webkit-border-radius: 50%;
-  border-radius: 50%;
+  border: 10px solid #272822;
+  -moz-border-radius: 4px 50% 50% 50%;
+  -ms-border-radius: 4px 50% 50% 50%;
+  -o-border-radius: 4px 50% 50% 50%;
+  -webkit-border-radius: 4px 50% 50% 50%;
+  border-radius: 4px 50% 50% 50%;
   height: 48px;
   position: absolute;
-  top: 0;
-  ((null)): 0;
+  left: -10px;
+  top: -5px;
   width: 48px;
 }
 #messages .avatar a {
@@ -447,62 +467,37 @@ input[type="text"] {
   -o-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
-  -moz-box-shadow: 0 0 10px #777;
-  -ms-box-shadow: 0 0 10px #777;
-  -o-box-shadow: 0 0 10px #777;
-  -webkit-box-shadow: 0 0 10px #777;
-  box-shadow: 0 0 10px #777;
+  -moz-box-shadow: 0 0 6px #a3b7be;
+  -ms-box-shadow: 0 0 6px #a3b7be;
+  -o-box-shadow: 0 0 6px #a3b7be;
+  -webkit-box-shadow: 0 0 6px #a3b7be;
+  box-shadow: 0 0 6px #a3b7be;
   -webkit-background-clip: padding-box;
 }
 #messages .text {
-  background: #fff;
   -moz-border-radius: 4px;
   -ms-border-radius: 4px;
   -o-border-radius: 4px;
   -webkit-border-radius: 4px;
   border-radius: 4px;
-  -moz-box-shadow: 0 1px 2px #aaa;
-  -ms-box-shadow: 0 1px 2px #aaa;
-  -o-box-shadow: 0 1px 2px #aaa;
-  -webkit-box-shadow: 0 1px 2px #aaa;
-  box-shadow: 0 1px 2px #aaa;
-  -webkit-background-clip: padding-box;
-  margin-left: 65px;
-  padding: 10px 10px 10px 10px;
-  position: relative;
-}
-#messages .text:before,
-#messages .text:after {
-  border-style: solid;
-  border-width: 5px;
-  content: '';
-  position: absolute;
-  top: 13px;
-  ((null)): 0;
-}
-#messages .text:before {
-  border-color: transparent #bbb transparent transparent;
-  left: -11px;
-}
-#messages .text:after {
-  border-color: transparent #fff transparent transparent;
-  left: -10px;
+  padding: 10px 10px 10px 65px;
 }
 #messages .text a {
-  color: #414141;
+  color: #fff;
   font-size: 0.945em;
   font-weight: 700;
   letter-spacing: 1px;
   margin-right: 10px;
+  text-shadow: 0 1px 1px #777;
   text-decoration: none;
 }
 #messages .text time {
-  color: #aaa;
-  font-size: 0.7em;
+  font-size: 0.8em;
   font-weight: 700;
+  text-shadow: 0 1px 1px #777;
 }
 #messages .text p {
-  color: #414141;
+  color: #f1f1f1;
   font-size: 0.845em;
   margin-top: 2px;
   word-wrap: break-word;

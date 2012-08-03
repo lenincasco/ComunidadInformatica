@@ -33,7 +33,7 @@ input[type="text"]
     height 60px
     width 100%
 #messages
-    background #eaeaea
+    height 450px
     overflow-y scroll
     &::-webkit-scrollbar
         width 8px
@@ -47,53 +47,46 @@ input[type="text"]
         background #555
     li
         margin 10px auto 0 auto
+        overflow hidden
         position relative
         width 98%
+        &:nth-child(2n+1) .text
+            background #333
+            background linear-gradient(top, #333, #444)
+        &:nth-child(2n+2) .text
+            background #666
+            background linear-gradient(top, #444, #333)
     .avatar
         background #272822
-        border-radius(50%)
+        border 10px solid #272822
+        border-radius(4px 50% 50% 50%)
         height 48px
-        absolute top 0
+        absolute left -10px top -5px
         width 48px
         a
             display(block)
             height 48px
             width 48px
-        img
+        img  
             border-radius(50%)
-            box-shadow(0 0 10px #777)
+            box-shadow(0 0 6px #a3b7be)
     .text
-        background #fff
         border-radius(4px)
-        box-shadow(0 1px 2px #aaa)
-        margin-left 65px
-        padding 10px 10px 10px 10px
-        position relative
-        &:before
-        &:after
-            border-style solid
-            border-width 5px
-            content ''
-            absolute top 13px
-        &:before
-            border-color transparent #bbb transparent transparent
-            left -11px
-        &:after
-            border-color transparent #fff transparent transparent
-            left -10px
+        padding 10px 10px 10px 65px
         a
-            color #414141
+            color #fff
             font-size 0.945em
             font-weight 700
             letter-spacing 1px
             margin-right 10px
+            text-shadow 0 1px 1px #777
             text-decoration none
         time
-            color #aaa
-            font-size 0.7em
+            font-size 0.8em
             font-weight 700
+            text-shadow 0 1px 1px #777
         p
-            color #414141
+            color #f1f1f1
             font-size 0.845em
             margin-top 2px
             word-wrap break-word
