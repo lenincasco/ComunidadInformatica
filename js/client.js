@@ -13,7 +13,7 @@ util = {
 
     salir: function() {
         var nombre = $('#nom')
-        var logout = $('#logout')
+        var logout = $('#salir')
         console.log('loging out')
         if (localStorage.userName) {
             console.log('remover username ' + localStorage.userName)
@@ -21,7 +21,7 @@ util = {
             nombre.val('')          
             nombre.attr('disabled', false)
             nombre.focus()
-            logout.hide('slow')
+            logout.hide(')
         }
     },
 
@@ -74,7 +74,7 @@ $(function() {
     var nombre = $('#nom')
     // Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
     var mensaje = $('#mensaje')
-    var logout = $('#logout')
+    var logout = $('#salir')
 
     $('#salir').on('click', function() {
         util.salir()
@@ -115,7 +115,7 @@ $(function() {
             // Hacemos un llamado al servidor con la funcion 'nombre' y le pasamos el nombre
             socket.emit('nombre', user)
             // Una vez logueado mostrar el boton de salir
-            logout.show('slow')
+            logout.show()
             // si en local no tenemos almacenado el nombre de usuario, se almacena
             if (!localStorage.userName) {
                 localStorage.userName = user
