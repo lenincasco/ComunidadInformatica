@@ -13,15 +13,13 @@ util = {
 
     salir: function() {
         var nombre = $('#nom')
-        var logout = $('#logout')
-        console.log('loging out')
+        var logout = $('#salir')
         if (localStorage.userName) {
-            console.log('remover username ' + localStorage.userName)
             localStorage.removeItem('userName')
             nombre.val('')          
             nombre.attr('disabled', false)
             nombre.focus()
-            logout.hide('slow')
+            logout.hide()
         }
     },
 
@@ -74,7 +72,7 @@ $(function() {
     var nombre = $('#nom')
     // Obtenemos el input mensaje que es el campo del mensaje (id="mensaje")
     var mensaje = $('#mensaje')
-    var logout = $('#logout')
+    var logout = $('#salir')
 
     $('#salir').on('click', function() {
         util.salir()
@@ -99,8 +97,7 @@ $(function() {
         socket.emit('nombre', user)
         nombre.attr('disabled', true)
         mensaje.focus()
-    } else {
-        logout.hide()
+        logout.show()
     }
 
     // Cuando pierda el foco el campo nombre
@@ -115,7 +112,7 @@ $(function() {
             // Hacemos un llamado al servidor con la funcion 'nombre' y le pasamos el nombre
             socket.emit('nombre', user)
             // Una vez logueado mostrar el boton de salir
-            logout.show('slow')
+            logout.show()
             // si en local no tenemos almacenado el nombre de usuario, se almacena
             if (!localStorage.userName) {
                 localStorage.userName = user
@@ -146,7 +143,6 @@ $(function() {
 
     //Cuando se de el evento mensaje
     socket.on('mensaje', function(mensaje, usuario, time) {
-        if (util.isBlank(mensaje)) return
         if(!util.focus) util.unread++
         util.updateTitle()
 

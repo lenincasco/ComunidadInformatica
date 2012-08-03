@@ -16,6 +16,7 @@ body
 #pop
     display none
 #salir
+    display(none)
     absolute right 10px top 10px
 #count
     margin 5px 0 15px 0
@@ -23,9 +24,8 @@ input,
 textarea
     border 1px solid #ddd
     box-sizing()
-    display block
+    display(block)
     padding 4px
-
 input[type="text"]
     margin-bottom 10px
     width 100%
@@ -33,7 +33,7 @@ input[type="text"]
     height 60px
     width 100%
 #messages
-    height 450px
+    background #eaeaea
     overflow-y scroll
     &::-webkit-scrollbar
         width 8px
@@ -46,55 +46,54 @@ input[type="text"]
     &::-webkit-scrollbar-thumb:active
         background #555
     li
-        margin 10px auto 10px auto
-        overflow hidden
+        margin 10px auto 0 auto
+        position relative
         width 98%
-        &:nth-child(2n+1) .text
-            background #bfd8dd
-            background linear-gradient(top, #bfd8dd, #94b1b9)
-            box-shadow(inset 0 2px 2px #e1eaef\, 0 1px 2px #a3b7be)
-            p
-                text-shadow 0 1px 1px #f1f1f1
-        &:nth-child(2n+2) .text
-            background #7b919c
-            background linear-gradient(top, #7b919c, #6a7a8a)
-            box-shadow(inset 0 2px 2px #a8b6bf\, 0 1px 2px #44505c)
-            p
-                text-shadow 0 1px 1px #ccc
     .avatar
         background #272822
-        border 10px solid #272822
-        border-left-width 0
         border-radius(50%)
-        float left
         height 48px
-        relative top -5px
+        absolute top 0
         width 48px
         a
-            display block
+            display(block)
             height 48px
             width 48px
         img
             border-radius(50%)
-            box-shadow(0 0 6px #a3b7be)
+            box-shadow(0 0 10px #777)
     .text
-        border-radius(16px)
-        padding 10px 10px 10px 60px
-        margin-left 5px
+        background #fff
+        border-radius(4px)
+        box-shadow(0 1px 2px #aaa)
+        margin-left 65px
+        padding 10px 10px 10px 10px
+        position relative
+        &:before
+        &:after
+            border-style solid
+            border-width 5px
+            content ''
+            absolute top 13px
+        &:before
+            border-color transparent #bbb transparent transparent
+            left -11px
+        &:after
+            border-color transparent #fff transparent transparent
+            left -10px
         a
-            color #fff
+            color #414141
             font-size 0.945em
             font-weight 700
             letter-spacing 1px
             margin-right 10px
-            text-shadow 0 1px 1px #777
             text-decoration none
         time
-            font-size 0.8em
+            color #aaa
+            font-size 0.7em
             font-weight 700
-            text-shadow 0 1px 1px #777
         p
-            color #222 //#3f4042
+            color #414141
             font-size 0.845em
             margin-top 2px
             word-wrap break-word
