@@ -128,7 +128,7 @@ $(function() {
         }
     })
 
-    //Cuando se da enter la caja de mensaje
+    // Cuando se da enter la caja de mensaje
     $('#mensaje').on('keyup', function(e) {
         if(e.which === 13) {
             e.preventDefault()
