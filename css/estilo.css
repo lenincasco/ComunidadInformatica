@@ -281,8 +281,8 @@ strong {
   display: inline-block;
   vertical-align: top;
   height: 16px;
-  position: relative;
-  top: 3px;
+/*position: relative
+  top: 3px*/
   width: 16px;
 }
 .lt-ie8 .emoticon {
