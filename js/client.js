@@ -91,7 +91,7 @@ $(function() {
     // si ya se habia conectado y por alguna razon recargo la pagina volvemos a poner su usario
     // el cual esta almacenado localmente
     // Comprobamos si no es null, para que no nos ponga un objeto nulo en el campo nombre
-    if (localStorage.userName) {
+    if (localStorage.userName && localStorage.userName !== 'null') {
         nombre.val(localStorage.userName)
         user = localStorage.userName
         socket.emit('nombre', user)
