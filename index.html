@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Chat</title>
 <link rel="stylesheet" type="text/css" href="css/estilo.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="js/libs/modernizr-2.5.3.min.js"></script>
 <script type="text/javascript" src="http://localhost:8080/socket.io/socket.io.js"></script>
 </head>
 
@@ -21,6 +21,8 @@
 	</form>
 	<ul id="messages"></ul>
 </div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js">\x3C/script>')</script>
 <script src="js/client.js"></script>
 </body>
 </html>

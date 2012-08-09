@@ -49,7 +49,14 @@ util = {
         return (text.match(blank) !== null)
     },
 
-    replaceEmoticon: function(mensaje) {
+    renderMessage: function(mensaje) {
+        mensaje = mensaje.replace(/&(?!\s)|</g, function (s) {
+            if (s == '&') {
+                return '&amp;'
+            } else {
+                return '&lt;'
+            }
+        })
         return mensaje.replace(/(:\)|:\(|:p|:P|:D|:o|:O|;\)|8\)|B\||>:\(|:\/|:'\(|3:\)|o:\)|O:\)|:\*|<3|\^_\^|-_-|o.O|>.<|:v|:V|:3|\(y\)|\(Y\))/g, '<span title="$1" class="emoticon"></span>')
     },
 
@@ -156,7 +163,7 @@ $(function() {
                 <div class="text">\
                     <a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank">&#64;' + usuario + '</a>\
                     <time>' + util.timeString(time) + '</time>\
-                    <p>' + util.replaceEmoticon(mensaje) + '</p>\
+                    <p>' + util.renderMessage(mensaje) + '</p>\
                 </div>\
             </li>')
     })
@@ -170,7 +177,7 @@ $(function() {
                 <div class="text">\
                     <a href="http://twitter.com/' + usuario + '" title="&#64;' + usuario + '" target="_blank">&#64;' + usuario + '</a>\
                     <time>' + util.timeString(time) + '</time>\
-                    <p>' + util.replaceEmoticon(mensaje) + '</p>\
+                    <p>' + util.renderMessage(mensaje) + '</p>\
                 </div>\
             </li>')
     })
