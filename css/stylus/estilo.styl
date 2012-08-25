@@ -1,9 +1,9 @@
-@import 'libs/reset'
+@import '../libs/reset'
 @import 'nib/gradients'
 @import 'nib/positions'
 @import 'nib/vendor'
-@import 'libs/classes'
-@import 'libs/emoticons'
+@import '../libs/classes'
+@import '../libs/emoticons'
 
 body
     background #272822
@@ -56,6 +56,8 @@ input[type="text"]
         &:nth-child(2n+2) .text
             background #666
             background linear-gradient(top, #444, #333)
+        &:hover time
+            opacity(1)
     .avatar
         background #272822
         border 10px solid #272822
@@ -82,9 +84,11 @@ input[type="text"]
             text-shadow 0 1px 1px #777
             text-decoration none
         time
-            font-size 0.8em
+            font-size 0.7em
             font-weight 700
+            transition()
             text-shadow 0 1px 1px #777
+            opacity(0)
         p
             color #f1f1f1
             font-size 0.845em
